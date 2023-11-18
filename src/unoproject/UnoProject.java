@@ -4,11 +4,13 @@
  */
 package unoproject;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 
 /**
  * Get this thing saved
@@ -17,12 +19,14 @@ import javafx.stage.Stage;
 public class UnoProject extends Application {
     
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("UnoInterface.fxml"));
+    public void start(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(FXMLDocumentController.class.getResource("UnoInterface.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("Uno Computer Game");
+        stage.sizeToScene();
         stage.show();
     }
 
