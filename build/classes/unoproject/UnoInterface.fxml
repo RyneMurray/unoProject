@@ -58,7 +58,7 @@
             <graphic>
                 <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../drawButton.png" />
+                        <Image url="@../unoimages/CardDraw.png" />
                     </image>
                 </ImageView>
             </graphic>
