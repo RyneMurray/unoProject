@@ -11,22 +11,22 @@ package unoproject;
 public class UnoController {
     private UnoCard currentCard;
     private VisualCard primaryDeck;
-    private Player playerOne;
-    private Player playerTwo;
+    private Player realPlayer;
+    private Player autoPlayer;
     private Player currentPlayer;
     
     public UnoController() {
-        this.playerOne = new Player ("You");
-        this.playerTwo = new Player ("They");
+        this.realPlayer = new Player ("You");
+        this.autoPlayer = new Player ("They");
         this.primaryDeck = new VisualCard();
     }
 
-    public Player getPlayerOne() {
-        return playerOne;
+    public Player getRealPlayer() {
+        return realPlayer;
     }
 
-    public Player getPlayerTwo() {
-        return playerTwo;
+    public Player getAutoPlayer() {
+        return autoPlayer;
     }
 
     public Player getCurrentPlayer() {
