@@ -25,7 +25,7 @@ import javafx.scene.layout.StackPane;
 public class FXMLDocumentController implements Initializable {
     
     private Label label;
-    private int Index;
+    private int index;
     private UnoController controller = new UnoController();
     private boolean wildCard;
     private boolean gameOver = false;
@@ -38,7 +38,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private StackPane discardPile;
     @FXML
-    private HBox computerHBox;
+    private HBox autoHBox;
     @FXML
     private StackPane drawPile;
     @FXML
@@ -54,16 +54,144 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button blue;
     @FXML
-    private HBox controlledPlayerHBox;
+    private HBox realPlayerHBox;
     @FXML
     private ImageView logo;
     
     private void playerHandle(MouseEvent event) {
-        
+        if(gameOver == false) {
+            if(controller.getCurrentPlayer() == controller.getRealPlayer()) {
+                for(int i = 0; i < 13; i++) {
+                    if(realPlayerHBox.getChildren().get(i) == event.getTarget()) {
+                        index = i;
+                        break;
+                    } 
+                }
+                String realCard = controller.getRealPlayer().getCards().get(index).getName();
+                if(controller.getRealPlayer().getCards().get(index).getName().equals("noneplusfour-1")) {
+                    playerDiscard(index);
+                    controller.setCurrentCard(controller.cards().getDiscardPile().peek());
+                    for(int i=0; i < 4; i++) {
+                        autoDraw();
+                    }
+                    txtField.setText("\nYou put down a wild plus four! pick a color: ");
+                    txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+                    if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                        txtField.setStyle("-fx-text-fill: green; -fx-font-size: 16px;");
+                    }
+                    wildCard = true;
+                    visibleCard(true);
+                    controller.setCurrentPlayer(controller.getAutoPlayer());
+                } else if(controller.getRealPlayer().getCards().get(index).getName().equals("nonewild-1")) {
+                    txtField.setText("\nYou put down a wild card! Pick a color: ");
+                    txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+                    playerDiscard(index);
+                    controller.setCurrentCard(controller.cards().getDiscardPile().peek());
+                    if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                        txtField.setText("Game Over. You Win!");
+                        setEndGame(true);
+                    }
+                    wildCard = true;
+                    visibleCard(true);
+                    controller.setCurrentPlayer(controller.getAutoPlayer());
+                }
+                System.out.println(realCard.substring(realCard.length()-9, realCard.length()-2));
+                if(realCard.substring(realCard.length()-9, realCard.length()-2).equals("plustwo") &&
+                    controller.match(controller.getRealPlayer().getCards().get(index))) {
+                    controller.cards().getDiscardPile().push(controller.getRealPlayer().getCards().get(index));
+                    playerDiscard(index);
+                    controller.setCurrentCard(controller.cards().getDiscardPile().peek());
+                    for(int i = 0; i < 2; i++) {
+                        autoDraw();
+                    }
+                    if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                        txtField.setText("Game Over. You Win!");
+                        setEndGame(true);
+                    }
+                    controller.setCurrentPlayer(controller.getAutoPlayer());
+            } else if(controller.match(controller.getRealPlayer().getCards().get(index))) {
+                   controller.cards().getDiscardPile().push(controller.getRealPlayer().getCards().get(index));
+                   playerDiscard(index);
+                   controller.setCurrentCard(controller.cards().getDiscardPile().peek());
+                   if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                        txtField.setText("Game Over. You Win!");
+                        setEndGame(true);
+                    }
+                    controller.setCurrentPlayer(controller.getAutoPlayer());
+                }
+            }
+        }
     }
     
     private void autoHandle() {
-        
+        if(gameOver == false) {
+            if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                txtField.setText("The Computer Wins!");
+                txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+                setEndGame(true);
+            }
+            if(controller.cards().getDrawPile().isEmpty()) {
+                newShuffle();
+            }
+            String[] color = {"red", "green", "yellow", "blue"};
+            String autoChoice = "";
+            for(int i = 0; i < controller.getAutoPlayer().getCards().size(); i++) {
+                UnoCard autoCard = controller.getAutoPlayer().getCards().get(i);
+            if(controller.match((controller.getAutoPlayer().getCards().get(i))) == false) {
+                continue;
+            }
+            if(autoCard.getName().substring(autoCard.getName().length()-9, autoCard.getName().length()-2).equals("plustwo") &&
+                    controller.match(controller.getAutoPlayer().getCards().get(i))) {
+            }
+            else if(controller.match(controller.getAutoPlayer().getCards().get(i)) == true &&
+                    !(autoCard.getNumber().equals("-1"))) {
+                autoDiscard(i);
+                controller.setCurrentCard((controller.cards().getDiscardPile().peek()));
+                if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                  txtField.setText("The Computer Wins!");
+                    txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;"); 
+                    setEndGame(true);  
+                }
+                controller.setCurrentPlayer((controller.getRealPlayer()));
+                return;
+            }
+            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("noneplusfour-1")) {
+                autoChoice = color[(int) (Math.random() * (color.length))];
+                autoDiscard(i);
+                controller.cards().getDiscardPile().peek().setColor(autoChoice);
+                controller.setCurrentCard(controller.cards().getDiscardPile().peek());
+                if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                    txtField.setText("The Computer Wins!");
+                    txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;"); 
+                    setEndGame(true);
+                }
+                for(int j = 0; j < 4; j++) {
+                playerDraw();
+                }
+                txtField.setText("The color is now " + autoChoice);
+                txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+                controller.setCurrentPlayer(controller.getRealPlayer());
+                return;
+            }
+            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("nonewild-1")) {
+                autoChoice = color[(int) (Math.random() * (color.length))];
+                txtField.setText("The color is now " + autoChoice);
+                txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+                autoDiscard(i);
+                
+                controller.cards().getDiscardPile().peek().setColor(autoChoice);
+                controller.setCurrentCard(controller.cards().getDiscardPile().peek());
+                if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                    txtField.setText("The Computer Wins!");
+                    txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;"); 
+                    setEndGame(true);
+                }
+                controller.setCurrentPlayer(controller.getRealPlayer());
+                return;
+            }
+            }
+            autoDraw();
+        }
     }
     
     private void setEndGame(boolean b) {
@@ -73,35 +201,35 @@ public class FXMLDocumentController implements Initializable {
             gameOver = false;
         }
     }
-    //make discard functions
+    //make discard functions DONE
     public void playerDiscard(int n) {
         controller.cards().getDiscardPile().push(controller.getRealPlayer().remove(controller.getRealPlayer().getCards().get(n)));
-        discardPile.getChildren().add(controlledPlayerHBox.getChildren().remove(n));
+        discardPile.getChildren().add(realPlayerHBox.getChildren().remove(n));
     }
     
     public void autoDiscard(int n) {
         if(controller.match(controller.getAutoPlayer().getCards().get(n))) {
             ImageView brief = new ImageView(controller.getAutoPlayer().getCards().get(n).getCardFace());
             controller.cards().getDiscardPile().push(controller.getAutoPlayer().getCards().remove(n));
-            computerHBox.getChildren().remove(n);
+            autoHBox.getChildren().remove(n);
             discardPile.getChildren().add(brief);
         }
     }
     
-    public void visibility(boolean b) {
+    public void visibleButton(boolean b) {
         if ( b == true) {
             txtField.setStyle(txtField.getStyle() + "visibility: visible");
             drawPile.setStyle(drawPile.getStyle() + "visibility: visible");
             discardPile.setStyle(discardPile.getStyle() + "visibility: visible");
-            controlledPlayerHBox.setStyle(controlledPlayerHBox.getStyle() + "visibility: visible");
-            computerHBox.setStyle(computerHBox.getStyle() + "visibility: visible");
+            realPlayerHBox.setStyle(realPlayerHBox.getStyle() + "visibility: visible");
+            autoHBox.setStyle(autoHBox.getStyle() + "visibility: visible");
             drawButton.setStyle(drawButton.getStyle() + "visibility: visible");
         } else if (b == false) {
             txtField.setStyle("visibility: hidden");
             drawPile.setStyle("visibility: hidden");
             discardPile.setStyle("visibility: hidden");
-            controlledPlayerHBox.setStyle("visibility: hidden");
-            computerHBox.setStyle("visibility: hidden");
+            realPlayerHBox.setStyle("visibility: hidden");
+            autoHBox.setStyle("visibility: hidden");
             drawButton.setStyle("visibility: hidden");
             logo.setStyle("visibility: hidden");
         }
@@ -135,7 +263,7 @@ public class FXMLDocumentController implements Initializable {
         ImageView brief = new ImageView(controller.cards().getDrawPile().peek().getCardBack());
         drawPile.getChildren().remove(drawPile.getChildren().size()-1);
         controller.getAutoPlayer().draw(controller.cards().getDrawPile().pop());
-        computerHBox.getChildren().add(brief);
+        autoHBox.getChildren().add(brief);
         txtField.setText("\nAuto-draw complete. Now it's your turn!");
         txtField.setStyle("-fx-text-fill: blue; -fx-font-size: 16px;");
         controller.setCurrentPlayer(controller.getRealPlayer());
@@ -180,7 +308,7 @@ public class FXMLDocumentController implements Initializable {
       
     @FXML
     private void handleStartButton(MouseEvent event) {
-        visibility(true);
+        visibleButton(true);
         for(int i = 0; i < controller.cards().getDrawPile().size(); i++) {
             ImageView brief = new ImageView(controller.cards().getDrawPile().get(i).getCardBack());
             drawPile.getChildren().add(brief);
@@ -259,10 +387,10 @@ public class FXMLDocumentController implements Initializable {
     private void select(MouseEvent event) {
         if(wildCard == false) {
             ArrayList<ImageView> arr = new ArrayList<ImageView>();
-            for(int i = 0; i < controlledPlayerHBox.getChildren().size(); i++) {
-                arr.add((ImageView) controlledPlayerHBox.getChildren().get(i));
+            for(int i = 0; i < realPlayerHBox.getChildren().size(); i++) {
+                arr.add((ImageView) realPlayerHBox.getChildren().get(i));
             }
-            for(int i = 0; i < controlledPlayerHBox.getChildren().size(); i++) {
+            for(int i = 0; i < realPlayerHBox.getChildren().size(); i++) {
                 arr.get(i).setOnMouseClicked(this::playerHandle);
             }
         }

@@ -53,7 +53,7 @@ public class UnoController {
         return currentCard;
     }
     
-    public boolean matching(UnoCard c) {
+    public boolean match(UnoCard c) {
         System.out.println(
 	"------------------\n"+
         currentCard.getColor() + " + " + c.getColor() + "=" +
