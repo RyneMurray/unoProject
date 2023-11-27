@@ -20,39 +20,30 @@ public class UnoController {
         this.autoPlayer = new Player ("They");
         this.primaryDeck = new VisualCard();
     }
-
     public Player getRealPlayer() {
         return realPlayer;
     }
-
     public Player getAutoPlayer() {
         return autoPlayer;
     }
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
-
     public void setCurrentCard(UnoCard currentCard) {
         this.currentCard = currentCard;
     }
-
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
-    }
-    
+    }    
     public VisualCard cards() {
         return primaryDeck;
-    }
-    
+    }   
     public void draw() {
         currentPlayer.draw(primaryDeck.getDrawPile().pop());
-    }
-    
+    }    
     public UnoCard getCurrentCard() {
         return currentCard;
-    }
-    
+    }    
     public boolean match(UnoCard c) {
         System.out.println(
 	"------------------\n"+

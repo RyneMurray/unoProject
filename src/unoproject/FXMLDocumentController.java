@@ -26,10 +26,10 @@ public class FXMLDocumentController implements Initializable {
     
     private Label label;
     private int index;
-    private UnoController controller = new UnoController();
+    private final UnoController controller = new UnoController();
     private boolean wildCard;
     private boolean gameOver = false;
-    //create win condition
+    //create win condition DONE
     
     @FXML
     private AnchorPane Anchor;
@@ -224,6 +224,7 @@ public class FXMLDocumentController implements Initializable {
             realPlayerHBox.setStyle(realPlayerHBox.getStyle() + "visibility: visible");
             autoHBox.setStyle(autoHBox.getStyle() + "visibility: visible");
             drawButton.setStyle(drawButton.getStyle() + "visibility: visible");
+            logo.setStyle("visibility: visible");
         } else if (b == false) {
             txtField.setStyle("visibility: hidden");
             drawPile.setStyle("visibility: hidden");
@@ -254,6 +255,7 @@ public class FXMLDocumentController implements Initializable {
         ImageView brief = new ImageView(controller.cards().getDrawPile().peek().getCardFace());
         drawPile.getChildren().remove(drawPile.getChildren().size()-1);
         controller.getCurrentPlayer().draw(controller.cards().getDrawPile().pop());
+        realPlayerHBox.getChildren().add(brief);
         txtField.setText("\nHere's your card! Computer now auto-drawing card...");
         txtField.setStyle("-fx-text-fill: blue; -fx-font-size: 16px;");
         controller.setCurrentPlayer(controller.getAutoPlayer());
@@ -307,7 +309,7 @@ public class FXMLDocumentController implements Initializable {
     }
       
     @FXML
-    private void handleStartButton(MouseEvent event) {
+    private void handleStartButton() {
         visibleButton(true);
         for(int i = 0; i < controller.cards().getDrawPile().size(); i++) {
             ImageView brief = new ImageView(controller.cards().getDrawPile().get(i).getCardBack());
@@ -331,7 +333,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void drawClicked(MouseEvent event) {
+    private void drawClicked() {
         if(controller.getCurrentPlayer() == controller.getRealPlayer()) {
             playerDraw();
             controller.setCurrentPlayer(controller.getAutoPlayer());
@@ -339,7 +341,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @FXML
-    private void mouseMoved(MouseEvent event) {
+    private void mouseMoved() {
         if(wildCard == false) {
             if(controller.getCurrentPlayer() == controller.getAutoPlayer()) {
                 autoHandle();
@@ -348,7 +350,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @FXML
-    private void redClicked(MouseEvent event) {
+    private void redClicked() {
         controller.getCurrentCard().setColor("red");
 	wildCard = false;
 	visibleCard(false);
@@ -357,7 +359,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void greenClicked(MouseEvent event) {
+    private void greenClicked() {
         controller.getCurrentCard().setColor("green");
 	wildCard = false;
 	visibleCard(false);
@@ -366,7 +368,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void yellowClicked(MouseEvent event) {
+    private void yellowClicked() {
          controller.getCurrentCard().setColor("yellow");
 	wildCard = false;
 	visibleCard(false);
@@ -375,7 +377,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void blueClicked(MouseEvent event) {
+    private void blueClicked() {
        controller.getCurrentCard().setColor("blue");
 	wildCard = false;
 	visibleCard(false);
@@ -384,7 +386,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void select(MouseEvent event) {
+    private void select() {
         if(wildCard == false) {
             ArrayList<ImageView> arr = new ArrayList<ImageView>();
             for(int i = 0; i < realPlayerHBox.getChildren().size(); i++) {
@@ -396,8 +398,8 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         // TODO
     }  
     

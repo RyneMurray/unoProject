@@ -59,9 +59,9 @@ public class VisualCard {
         } while(cardIndex < 100);
         
         drawPile = cards;
-        discardPile = new Stack<UnoCard>();
-        drawPileImage = new Stack<ImageView>();
-        discardPileImage = new Stack<ImageView>();
+        discardPile = new Stack<>();
+        drawPileImage = new Stack<>();
+        discardPileImage = new Stack<>();
         Collections.shuffle(drawPile);
     }
 
