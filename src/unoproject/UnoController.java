@@ -16,8 +16,8 @@ public class UnoController {
     private Player currentPlayer;
     
     public UnoController() {
-        this.realPlayer = new Player ("You");
-        this.autoPlayer = new Player ("They");
+        this.realPlayer = new Player ("Person");
+        this.autoPlayer = new Player ("Computer");
         this.primaryDeck = new VisualCard();
     }
     public Player getRealPlayer() {
