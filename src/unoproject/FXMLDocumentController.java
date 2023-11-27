@@ -68,7 +68,7 @@ public class FXMLDocumentController implements Initializable {
                     } 
                 }
                 String realCard = controller.getRealPlayer().getCards().get(index).getName();
-                if(controller.getRealPlayer().getCards().get(index).getName().equals("noneplusfour-1")) {
+                if(controller.getRealPlayer().getCards().get(index).getName().equals("WildPlusFour1")) {
                     playerDiscard(index);
                     controller.setCurrentCard(controller.cards().getDiscardPile().peek());
                     for(int i=0; i < 4; i++) {
@@ -82,7 +82,7 @@ public class FXMLDocumentController implements Initializable {
                     wildCard = true;
                     visibleCard(true);
                     controller.setCurrentPlayer(controller.getAutoPlayer());
-                } else if(controller.getRealPlayer().getCards().get(index).getName().equals("nonewild-1")) {
+                } else if(controller.getRealPlayer().getCards().get(index).getName().equals("Wild1")) {
                     txtField.setText("\nYou put down a wild card! Pick a color: ");
                     txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
                     playerDiscard(index);
@@ -96,7 +96,7 @@ public class FXMLDocumentController implements Initializable {
                     controller.setCurrentPlayer(controller.getAutoPlayer());
                 }
                 System.out.println(realCard.substring(realCard.length()-9, realCard.length()-2));
-                if(realCard.substring(realCard.length()-9, realCard.length()-2).equals("plustwo") &&
+                if(realCard.substring(realCard.length()-9, realCard.length()-2).equals("PlusTwo") &&
                     controller.match(controller.getRealPlayer().getCards().get(index))) {
                     controller.cards().getDiscardPile().push(controller.getRealPlayer().getCards().get(index));
                     playerDiscard(index);
@@ -155,7 +155,7 @@ public class FXMLDocumentController implements Initializable {
                 controller.setCurrentPlayer((controller.getRealPlayer()));
                 return;
             }
-            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("noneplusfour-1")) {
+            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("WildPlusFour1")) {
                 autoChoice = color[(int) (Math.random() * (color.length))];
                 autoDiscard(i);
                 controller.cards().getDiscardPile().peek().setColor(autoChoice);
@@ -173,7 +173,7 @@ public class FXMLDocumentController implements Initializable {
                 controller.setCurrentPlayer(controller.getRealPlayer());
                 return;
             }
-            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("nonewild-1")) {
+            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("Wild1")) {
                 autoChoice = color[(int) (Math.random() * (color.length))];
                 txtField.setText("The color is now " + autoChoice);
                 txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");

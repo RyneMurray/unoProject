@@ -10,14 +10,14 @@ import javafx.scene.image.Image;
  *
  * @author murra
  */
-public class UnoCard {
-    private String number;
-    private String action;
+public final class UnoCard {
+    private final String number;
+    private final String action;
     public String color;
     public Image cardFace;
     public Image cardBack;
     public boolean faceDown = false;
-    private String name;
+    private final String name;
 
     public UnoCard(String number, String action, String color) {
         this.number = number;

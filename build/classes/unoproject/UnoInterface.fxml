@@ -127,7 +127,7 @@
 	
 	
         <Rectangle id="human" arcHeight="0.0" arcWidth="0.0" fill="BLACK" height="207.0" layoutX="100.0" layoutY="671.0" onMouseEntered="#select" opacity="0.13" stroke="BLACK" strokeType="INSIDE" width="1000.0" />
-        <HBox fx:id="controlledPlayerHBox" layoutX="100.0" layoutY="675.0" mouseTransparent="false" prefHeight="200.0" prefWidth="2000.0" snapToPixel="false" spacing="5.0" />
+        <HBox fx:id="realPlayerHBox" layoutX="100.0" layoutY="675.0" mouseTransparent="false" prefHeight="200.0" prefWidth="2000.0" snapToPixel="false" spacing="5.0" />
 
     </children>
 
