@@ -215,7 +215,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public void visibleButton(boolean b) {
-        if ( b == true) {
+        if (b == true) {
             txtField.setStyle(txtField.getStyle() + "visibility: visible");
             drawPile.setStyle(drawPile.getStyle() + "visibility: visible");
             discardPile.setStyle(discardPile.getStyle() + "visibility: visible");
@@ -230,7 +230,7 @@ public class FXMLDocumentController implements Initializable {
             realPlayerHBox.setStyle("visibility: hidden");
             autoHBox.setStyle("visibility: hidden");
             drawButton.setStyle("visibility: hidden");
-            logo.setStyle("visibility: hidden");
+            logo.setStyle("visibility: visible");
         }
     }
     
