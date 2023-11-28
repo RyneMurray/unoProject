@@ -18,7 +18,7 @@
 
             <image>
 
-                <Image url="@../unoimages/Tabletop.jpg" />
+                <Image url="@../otherimages/Tabletop.jpg" />
 
             </image>
 
@@ -27,7 +27,7 @@
 
             <image>
 
-                <Image url="@../unoimages/Logo.jpg" />
+                <Image url="@../otherimages/Logo.jpg" />
 
             </image>
 
@@ -37,7 +37,7 @@
 
             <image>
 
-                <Image url="@../unoimages/Logo.jpg" />
+                <Image url="@../otherimages/Logo.jpg" />
 
             </image>
 
@@ -58,7 +58,7 @@
             <graphic>
                 <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../unoimages/CardDraw.png" />
+                        <Image url="@../otherimages/CardDraw.png" />
                     </image>
                 </ImageView>
             </graphic>

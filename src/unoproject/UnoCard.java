@@ -11,13 +11,13 @@ import javafx.scene.image.Image;
  * @author murra
  */
 public final class UnoCard {
-    private final String number;
-    private final String action;
+    private String number;
+    private String action;
     public String color;
     public Image cardFace;
     public Image cardBack;
     public boolean faceDown = false;
-    private final String name;
+    private String name;
 
     public UnoCard(String number, String action, String color) {
         this.number = number;
@@ -30,8 +30,8 @@ public final class UnoCard {
     }
     
     public void setCardFace() {
-        String path = "/unoimages/" + name + ".png";
-        String backSidePath = "/unoimages/UNO-Back.png";
+        String path = "/cardfaceimages/" + name + ".png";
+        String backSidePath = "/otherimages/UNO-Back.png";
         this.cardFace = new Image(path, 175, 175, true, true);
         this.cardBack = new Image(backSidePath, 175, 175, true, true);
     }   

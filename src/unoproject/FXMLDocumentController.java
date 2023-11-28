@@ -66,7 +66,7 @@ public class FXMLDocumentController implements Initializable {
                     } 
                 }
                 String realCard = controller.getRealPlayer().getCards().get(index).getName();
-                if(controller.getRealPlayer().getCards().get(index).getName().equals("WildPlusFour1")) {
+                if(controller.getRealPlayer().getCards().get(index).getName().equals("WildPlusFour-1")) {
                     playerDiscard(index);
                     controller.setCurrentCard(controller.cards().getDiscardPile().peek());
                     for(int i=0; i < 4; i++) {
@@ -80,7 +80,7 @@ public class FXMLDocumentController implements Initializable {
                     wildCard = true;
                     visibleCard(true);
                     controller.setCurrentPlayer(controller.getAutoPlayer());
-                } else if(controller.getRealPlayer().getCards().get(index).getName().equals("Wild1")) {
+                } else if(controller.getRealPlayer().getCards().get(index).getName().equals("WildWild1")) {
                     txtField.setText("\nYou put down a wild card! Pick a color: ");
                     txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
                     playerDiscard(index);
@@ -138,7 +138,7 @@ public class FXMLDocumentController implements Initializable {
             if(controller.match((controller.getAutoPlayer().getCards().get(i))) == false) {
                 continue;
             }
-            if(autoCard.getName().substring(autoCard.getName().length()-9, autoCard.getName().length()-2).equals("plustwo") &&
+            if(autoCard.getName().substring(autoCard.getName().length()-9, autoCard.getName().length()-2).equals("PlusTwo") &&
                     controller.match(controller.getAutoPlayer().getCards().get(i))) {
             }
             else if(controller.match(controller.getAutoPlayer().getCards().get(i)) == true &&
@@ -153,7 +153,7 @@ public class FXMLDocumentController implements Initializable {
                 controller.setCurrentPlayer((controller.getRealPlayer()));
                 return;
             }
-            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("WildPlusFour1")) {
+            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("WildPlusFour-1")) {
                 autoChoice = color[(int) (Math.random() * (color.length))];
                 autoDiscard(i);
                 controller.cards().getDiscardPile().peek().setColor(autoChoice);
@@ -171,7 +171,7 @@ public class FXMLDocumentController implements Initializable {
                 controller.setCurrentPlayer(controller.getRealPlayer());
                 return;
             }
-            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("Wild1")) {
+            else if(controller.getAutoPlayer().getCards().get(i).getName().equals("WildWild1")) {
                 autoChoice = color[(int) (Math.random() * (color.length))];
                 txtField.setText("The color is now " + autoChoice);
                 txtField.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
@@ -349,7 +349,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void redClicked() {
-        controller.getCurrentCard().setColor("red");
+        controller.getCurrentCard().setColor("Red");
 	wildCard = false;
 	visibleCard(false);
 	txtField.setText("\nThe color is now red");
@@ -358,7 +358,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void greenClicked() {
-        controller.getCurrentCard().setColor("green");
+        controller.getCurrentCard().setColor("Green");
 	wildCard = false;
 	visibleCard(false);
 	txtField.setText("\nThe color is now green");
@@ -367,7 +367,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void yellowClicked() {
-         controller.getCurrentCard().setColor("yellow");
+         controller.getCurrentCard().setColor("Yellow");
 	wildCard = false;
 	visibleCard(false);
 	txtField.setText("\nThe color is now yellow");
@@ -376,7 +376,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void blueClicked() {
-       controller.getCurrentCard().setColor("blue");
+       controller.getCurrentCard().setColor("Blue");
 	wildCard = false;
 	visibleCard(false);
 	txtField.setText("\nThe color is now blue");

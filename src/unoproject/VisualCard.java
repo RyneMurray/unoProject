@@ -18,41 +18,47 @@ public class VisualCard {
     private Stack<ImageView> drawPileImage;
     private Stack<ImageView> discardPileImage;
     public Stack<UnoCard> cards = new Stack<>();
-    public String[] colors = {"red", "yellow", "green", "blue", "none"};
+    public String[] colors = {"Red", "Yellow", "Green", "Blue", "Wild"};
+    
     public VisualCard() {
         int colorIndex = 0;
         int cardIndex = 0;
         
         do {
           if(colorIndex <= 3) {
-              for(int c = 0; c < 12; c++) {
+              for(int c = 0; c < 13; c++) {
               if (c == 0) {
-                  cards.add(new UnoCard("0", "number",colors[colorIndex]));
+                  cards.add(new UnoCard("0", "Number",colors[colorIndex]));
                   cardIndex++;
               } else if (c>0 && c<10) {
-                  cards.add(new UnoCard(Integer.toString(c),"number",colors[colorIndex]));
+                  cards.add(new UnoCard(Integer.toString(c),"Number",colors[colorIndex]));
                   cardIndex++;
-                  cards.add(new UnoCard(Integer.toString(c),"number",colors[colorIndex]));
+                  cards.add(new UnoCard(Integer.toString(c),"Number",colors[colorIndex]));
                   cardIndex++;
               } else if(c == 10) {
-                  cards.add(new UnoCard("-1","skip",colors[colorIndex]));
+                  cards.add(new UnoCard("-1","Skip",colors[colorIndex]));
                   cardIndex++;
-                  cards.add(new UnoCard("-1","skip",colors[colorIndex]));
+                  cards.add(new UnoCard("-1","Skip",colors[colorIndex]));
                   cardIndex++;
               } else if (c == 11) {
-                  cards.add(new UnoCard("-1","plustwo",colors[colorIndex]));
+                  cards.add(new UnoCard("-1","PlusTwo",colors[colorIndex]));
                   cardIndex++;
-                  cards.add(new UnoCard("-1","plustwo",colors[colorIndex]));
+                  cards.add(new UnoCard("-1","PlusTwo",colors[colorIndex]));
                   cardIndex++;
+              } else if (c == 12) {
+                 cards.add(new UnoCard("-1","Reverse",colors[colorIndex]));
+                  cardIndex++;
+                  cards.add(new UnoCard("-1","Reverse",colors[colorIndex]));
+                  cardIndex++; 
               }
           }
           }
          if(colorIndex > 3) {
              for(int i = 0; i < 4; i++) {
-                 cards.add(new UnoCard("-1", "plusfour", colors[4]));
+                 cards.add(new UnoCard("-1", "PlusFour", colors[4]));
                  cardIndex++;
              } for(int i = 0; i < 4; i++) {
-             cards.add(new UnoCard("-1", "wild", colors[4]));
+             cards.add(new UnoCard("-1", "Wild", colors[4]));
              cardIndex++;
          }   
          } colorIndex++;
