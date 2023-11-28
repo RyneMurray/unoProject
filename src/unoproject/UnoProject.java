@@ -20,8 +20,8 @@ public class UnoProject extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(FXMLDocumentController.class.getResource("UnoInterface.fxml"));        
- 
+        Parent root = FXMLLoader.load(FXMLDocumentController.class.getResource("UnoInterface.fxml")); 
+                 
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
@@ -36,5 +36,5 @@ public class UnoProject extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+       
 }
