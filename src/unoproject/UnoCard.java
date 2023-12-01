@@ -30,7 +30,7 @@ public final class UnoCard {
     }
     
     public void setCardFace() {
-        String path = "/cardfaceimages/" + name + ".png";
+        String path = "/unoimages/" + name + ".png";
         String backSidePath = "/otherimages/UNO-Back.png";
         this.cardFace = new Image(path, 175, 175, true, true);
         this.cardBack = new Image(backSidePath, 175, 175, true, true);
