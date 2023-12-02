@@ -252,7 +252,7 @@ public class FXMLDocumentController implements Initializable {
     public void playerDraw() {
         ImageView brief = new ImageView(controller.cards().getDrawPile().peek().getCardFace());
         drawPile.getChildren().remove(drawPile.getChildren().size()-1);
-        controller.getCurrentPlayer().draw(controller.cards().getDrawPile().pop());
+        controller.getRealPlayer().draw(controller.cards().getDrawPile().pop());
         realPlayerHBox.getChildren().add(brief);
         txtField.setText("\nHere's your card! Computer now auto-drawing card...");
         txtField.setStyle("-fx-text-fill: blue; -fx-font-size: 16px;");
@@ -307,7 +307,7 @@ public class FXMLDocumentController implements Initializable {
     }
       
     @FXML
-    private void handleStartButton() {
+    public void handleStartButton() {
         visibleButton(true);
         for(int i = 0; i < controller.cards().getDrawPile().size(); i++) {
             ImageView brief = new ImageView(controller.cards().getDrawPile().get(i).getCardBack());
@@ -331,7 +331,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void drawClicked() {
+    public void drawClicked() {
         if(controller.getCurrentPlayer() == controller.getRealPlayer()) {
             playerDraw();
             controller.setCurrentPlayer(controller.getAutoPlayer());
@@ -339,7 +339,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @FXML
-    private void mouseMoved() {
+    public void mouseMoved() {
         if(wildCard == false) {
             if(controller.getCurrentPlayer() == controller.getAutoPlayer()) {
                 autoHandle();
@@ -348,7 +348,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @FXML
-    private void redClicked() {
+    public void redClicked() {
         controller.getCurrentCard().setColor("Red");
 	wildCard = false;
 	visibleCard(false);
@@ -357,7 +357,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void greenClicked() {
+    public void greenClicked() {
         controller.getCurrentCard().setColor("Green");
 	wildCard = false;
 	visibleCard(false);
@@ -366,7 +366,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void yellowClicked() {
+    public void yellowClicked() {
          controller.getCurrentCard().setColor("Yellow");
 	wildCard = false;
 	visibleCard(false);
@@ -375,7 +375,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void blueClicked() {
+    public void blueClicked() {
        controller.getCurrentCard().setColor("Blue");
 	wildCard = false;
 	visibleCard(false);
@@ -384,7 +384,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void select() {
+    public void select() {
         if(wildCard == false) {
             ArrayList<ImageView> arr = new ArrayList<ImageView>();
             for(int i = 0; i < realPlayerHBox.getChildren().size(); i++) {
