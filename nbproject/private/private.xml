@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/murra/Documents/GitHub/unoProject/src/unoproject/FXMLDocumentController.java</file>
-            <file>file:/C:/Users/murra/Documents/GitHub/unoProject/src/unoproject/UnoInterface.fxml</file>
+            <file>file:/C:/Users/murra/Documents/GitHub/unoProject/src/unoproject/UnoController.java</file>
+            <file>file:/C:/Users/murra/Documents/GitHub/unoProject/src/unoproject/Player.java</file>
             <file>file:/C:/Users/murra/Documents/GitHub/unoProject/src/unoproject/UnoProject.java</file>
+            <file>file:/C:/Users/murra/Documents/GitHub/unoProject/src/unoproject/UnoCard.java</file>
         </group>
     </open-files>
 </project-private>

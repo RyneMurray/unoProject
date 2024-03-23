@@ -1,6 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
+ * Source: https://github.com/GabrielWeinbrenner/UNO-in-JAVA
  */
 package unoproject;
 
@@ -8,7 +9,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -107,7 +111,30 @@ public class FXMLDocumentController implements Initializable {
                         setEndGame(true);
                     }
                     controller.setCurrentPlayer(controller.getAutoPlayer());
-            } else if(controller.match(controller.getRealPlayer().getCards().get(index))) {
+            } else if(realCard.substring(realCard.length()-6, realCard.length()-2).equals("Skip") &&
+                    controller.match(controller.getRealPlayer().getCards().get(index))) {
+                    controller.cards().getDiscardPile().push(controller.getRealPlayer().getCards().get(index));
+                    playerDiscard(index);
+                    controller.setCurrentCard(controller.cards().getDiscardPile().peek());                    
+                    if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                        txtField.setText("Game Over. You Win!");
+                        setEndGame(true);
+                    }
+                    controller.setCurrentPlayer(controller.getRealPlayer());
+            } 
+            
+                else if(realCard.substring(realCard.length()-9, realCard.length()-2).equals("Reverse") &&
+                    controller.match(controller.getRealPlayer().getCards().get(index))) {
+                    controller.cards().getDiscardPile().push(controller.getRealPlayer().getCards().get(index));
+                    playerDiscard(index);
+                    controller.setCurrentCard(controller.cards().getDiscardPile().peek());                    
+                    if(controller.getCurrentPlayer().getCards().isEmpty()) {
+                        txtField.setText("Game Over. You Win!");
+                        setEndGame(true);
+                    }
+                    controller.setCurrentPlayer(controller.getRealPlayer());
+            }
+                else if(controller.match(controller.getRealPlayer().getCards().get(index))) {
                    controller.cards().getDiscardPile().push(controller.getRealPlayer().getCards().get(index));
                    playerDiscard(index);
                    controller.setCurrentCard(controller.cards().getDiscardPile().peek());
